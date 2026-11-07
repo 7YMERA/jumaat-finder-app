@@ -453,7 +453,7 @@
       if (map) {
         const mk = L.circleMarker(mapPos, {
           radius: p.kind === "masjid" ? 9 : 7,
-          color: pl.status === "yes" ? "#0f766e" : "#b45309",
+          color: pl.status === "yes" ? "#0a6c74" : "#a86d12",
           fillOpacity: p.approx ? 0.15 : 0.85, weight: 2, dashArray: p.approx ? "3 3" : null,
         }).addTo(map).bindPopup(`${p.name.replace(/[<>&]/g, "")}<br>${p.approx ? "Location approximate" : `${fmtDist(pl.dist)} · ~${pl.walkMin} min walk`}`);
         mk.on("click", () => {
@@ -523,6 +523,12 @@
       if (p) setHere({ lat: p.lat, lng: p.lng, label: p.name });
     });
     $("btnLocate").addEventListener("click", locate);
+    $("themeBtn").addEventListener("click", () => {
+      const root = document.documentElement;
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      store.set("jumaat:theme", root.dataset.theme);
+    });
     $("onlyConfirmed").checked = store.get("jumaat:onlyConfirmed", false);
     $("onlyConfirmed").addEventListener("change", () => { store.set("jumaat:onlyConfirmed", $("onlyConfirmed").checked); render(); });
     $("bufferSelect").value = String(store.get("jumaat:buffer", 10));

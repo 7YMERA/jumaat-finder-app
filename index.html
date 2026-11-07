@@ -5,41 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Jumaat Finder</title>
   <meta name="description" content="Find a mosque near you for Solat Jumaat — distance, walking time, and when to leave.">
-  <meta name="theme-color" content="#0f766e">
+  <meta name="theme-color" content="#0a6c74">
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <script>try { var t = localStorage.getItem("jumaat:theme"); if (t) document.documentElement.dataset.theme = JSON.parse(t); } catch (e) {}</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="sky" aria-hidden="true"></div>
   <header class="top">
-    <div class="brand">
-      <span class="logo" aria-hidden="true">🕌</span>
-      <div>
-        <h1>Jumaat Finder</h1>
-        <p class="sub" id="placeLabel">Finding where you are…</p>
-      </div>
+    <div class="wrap">
+      <span class="mark"><span class="badge" aria-hidden="true">🕌</span>Jumaat Finder<i class="dot" aria-hidden="true">.</i></span>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
     </div>
   </header>
 
   <main>
+    <section class="intro">
+      <p class="eyebrow">Solat Jumaat · Klang Valley</p>
+      <h1>Where can I solat Jumaat from here?</h1>
+      <p class="lede" id="placeLabel">Finding where you are…</p>
+    </section>
+
     <!-- Countdown to the Friday khutbah -->
     <section class="card hero" id="hero">
       <div class="hero-row">
         <div>
-          <div class="label" id="fridayLabel">Next Friday</div>
+          <div class="eyebrow" id="fridayLabel">Next Friday</div>
           <div class="big" id="zuhrTime">--:--</div>
           <div class="muted" id="zuhrNote">Zuhr / azan Jumaat</div>
         </div>
         <div class="countdown">
-          <div class="label">Starts in</div>
-          <div class="big" id="countdown">--</div>
+          <div class="eyebrow">Starts in</div>
+          <div class="big mono" id="countdown">--</div>
         </div>
       </div>
     </section>
 
     <!-- Location controls -->
     <section class="controls">
-      <button class="btn primary" id="btnLocate">📍 Use my location</button>
+      <button class="btn primary" id="btnLocate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+        Use my location</button>
       <select id="presetSelect" aria-label="Pick a place">
         <option value="">…or pick a place</option>
       </select>
@@ -64,6 +76,7 @@
     <ul class="list" id="list"></ul>
 
     <section class="card tips">
+      <p class="eyebrow">Good to know</p>
       <h2>Tips for busy areas</h2>
       <ul>
         <li>Big mosques near malls fill up fast — the inner hall is often full ~10 min before azan. Aim to arrive early.</li>
